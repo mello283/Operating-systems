@@ -11,11 +11,7 @@
 #include <stdlib.h>
 #include <cstdio>
 using namespace std;
-/*struct arguments
-{
-    int argc;
-    string argv;
-};*/
+
 char** argv;
 int argc=0;
 
@@ -23,14 +19,13 @@ int getRows(string a);
 char** parseCommandLine(string aCommandLine);
 void putDaTokensIn(char** theData,int r);
 char* sanitize(char* theData);
-//int recognizeCommands(arguments* data);
+int recognizeCommands();
 
 char** parseCommandLine(string aCommandLine)
 {
 
     int row=getRows(aCommandLine)+50,col = 100;
     //initial set up
-    arguments arg;
     char** allData = new char*[row];
     for(int i=0;i<row;i++)
     {
@@ -99,24 +94,26 @@ char* sanitize(char* theData)
     theData[loc+1]='\0';
     return theData;
 }
-int recognizeCommands(arguments* data)
+int recognizeCommands()
 {
-    cout<<data->argv[0];
+    for(int listPoint = 0;listPoint<argc;listPoint++)
+    {
+        cout<<argv[listPoint]<<endl;
+    }
 }
 int main()
 {
-    //arguments ar;
     string inputStr = "";
     getline(cin,inputStr);
     char** finalData = parseCommandLine(inputStr);
     //sanitize the data
     for(int i=0;i<getRows(inputStr);i++)
     {
-        strcpy(argv,sanitize(finalData[i]));
+        finalData[i]=sanitize(finalData[i]);
     }
-
-    recognizeCommands(ar);
-
+    argc += getRows(inputStr);
+    argv = finalData;
+    recognizeCommands();
     for(int i=0;i<getRows(inputStr);i++)
     {
         delete[] finalData[i];
