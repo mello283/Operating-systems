@@ -94,11 +94,37 @@ char* sanitize(char* theData)
     theData[loc+1]='\0';
     return theData;
 }
+bool findMatch(char* data,string subString)
+{
+    int pos=0;
+    while(isalnum(data[pos]))
+    {
+        if(data[pos]!=subString[pos])
+        {
+            cout<<"no match!";
+            return false;
+        }
+        pos++;
+    }
+    cout<<"match found";
+    return true;
+}
 int recognizeCommands()
 {
+    char cwd[50];
     for(int listPoint = 0;listPoint<argc;listPoint++)
     {
-        cout<<argv[listPoint]<<endl;
+        if(findMatch(argv[listPoint],"cwd"))
+        {
+            if(getcwd(cwd,sizeof(cwd))!=nullptr)
+            {
+                cout<<cwd;
+            }
+            else
+            {
+                cerr<<"/nerror finding working directory/n";
+            }
+        }
     }
 }
 int main()
