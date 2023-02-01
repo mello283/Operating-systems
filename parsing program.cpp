@@ -23,7 +23,8 @@ int getRows(string a);
 char** parseCommandLine(string aCommandLine);
 void putDaTokensIn(char** theData,int r);
 char* sanitize(char* theData);
-int recognizeCommands(arguments* data);
+//int recognizeCommands(arguments* data);
+
 char** parseCommandLine(string aCommandLine)
 {
 
@@ -111,7 +112,7 @@ int main()
     //sanitize the data
     for(int i=0;i<getRows(inputStr);i++)
     {
-        strcpy(argv[i],sanitize(finalData[i]));
+        strcpy(argv,sanitize(finalData[i]));
     }
 
     recognizeCommands(ar);
