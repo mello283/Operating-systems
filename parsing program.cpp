@@ -125,6 +125,11 @@ int recognizeCommands()
                 cerr<<"/nerror finding working directory/n";
             }
         }
+        if(findMatch(argv[listPoint,"cd"))
+        {
+            chdir(getenv("HOME"));
+        }
+
     }
 }
 int main()
